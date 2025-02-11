@@ -9,13 +9,11 @@ public class PartitionThroughputTest
     /// <summary>
     /// Add documentation
     /// </summary>
-    public static void Test()
+    public static void Test(IPartitioner partitioner)
     {
         int[] hashBits = [.. Enumerable.Range(1, 18)];
         int[] threadCounts = [1, 2, 4, 8, 16, 32];      // Varying thread counts
         int tupleCount = 1_000_000;                     // 1 million tuples per test
-
-        var partitioner = new ConcurrentOutputPartitioner();
 
         DataTuple[] data = DataGenerator.GenerateData((int)Math.Pow(2.0, 24.0));
 
@@ -32,9 +30,18 @@ public class PartitionThroughputTest
                 double seconds = stopwatch.Elapsed.TotalSeconds;
                 double mtps = (tupleCount / 1_000_000.0) / seconds;
                 
-                if(threads < 10) Console.WriteLine($"       {hashBit}       {threads}       {mtps:F2}");
-                else Console.WriteLine($"       {hashBit}      {threads}       {mtps:F2}");
+                PrintData(hashBit, threads, mtps);
             }   
         }
+    }
+
+    private static void PrintData(int hashBit, int threads, double mtps)
+    {
+        if(threads < 10 && hashBit < 10) Console.WriteLine($"       {hashBit}       {threads}       {mtps:F2}");
+        else if (threads >= 10 && hashBit >= 10) Console.WriteLine($"      {hashBit}      {threads}       {mtps:F2}");
+        else if (threads >= 10) Console.WriteLine($"       {hashBit}      {threads}       {mtps:F2}");
+        else if (hashBit >= 10) Console.WriteLine($"      {hashBit}       {threads}       {mtps:F2}");
+        else Console.WriteLine($"       {hashBit}      {threads}       {mtps:F2}");
+        
     }
 }
