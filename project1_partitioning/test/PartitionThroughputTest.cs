@@ -19,7 +19,7 @@ namespace project1_partitioning.test
 
             DataTuple[] data = DataGenerator.GenerateData((int)Math.Pow(2.0, 24.0));
 
-            Console.WriteLine("HashBits     Threads     Throughput (MTPS)");
+            Console.WriteLine("HashBits Threads Throughput (MTPS)");
 
             foreach (var hashBit in hashBits)
             {
@@ -32,8 +32,9 @@ namespace project1_partitioning.test
                     double seconds = stopwatch.Elapsed.TotalSeconds;
                     double mtps = (tupleCount / 1_000_000.0) / seconds;
                     
-                    Console.WriteLine($"{hashBit}     {threads}     {mtps:F2}");
-                }
+                    if(threads < 10) Console.WriteLine($"       {hashBit}       {threads}       {mtps:F2}");
+                    else Console.WriteLine($"       {hashBit}      {threads}       {mtps:F2}");
+                }   
             }
         }
     }
