@@ -9,11 +9,10 @@ namespace project1_partitioning.partition;
 /// ADD DESCRIPTION HERE
 /// </summary>
 
-public class ParallelBufferPartitioner : IPartitioner
+public class ParallelBufferPartitioner(int chunkSize) : IPartitioner
 {
     public PartitionResult Partition(DataTuple[] data, int numberOfHashBits, int numberOfThreads)
     {
-        const int chunkSize = 100;
         int numberOfChunks = (data.Length + chunkSize - 1) / chunkSize; // Ceiling division
 
         

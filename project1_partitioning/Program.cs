@@ -1,5 +1,4 @@
-﻿using project1_partitioning.partition;
-using project1_partitioning.test;
+﻿using project1_partitioning.test;
 
-// PartitionThroughputTest.Test(new ConcurrentOutputPartitioner());
-PartitionThroughputTest.Test(new ParallelBufferPartitioner());
+//PartitionThroughputTest.ConcurrentOutputTest();
+PartitionThroughputTest.ParallelBufferChunkSizeTest();

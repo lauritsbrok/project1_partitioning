@@ -12,4 +12,5 @@ public interface IPartitioner
     /// <param name="numberOfThreads">The number of threads to use.</param>
     /// <returns>A PartitionResult containing the partitioned data.</returns>
     PartitionResult Partition(DataTuple[] data, int numberOfHashBits, int numberOfThreads);
+    
 }
