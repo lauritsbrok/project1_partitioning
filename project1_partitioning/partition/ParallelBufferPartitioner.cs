@@ -11,7 +11,7 @@ namespace project1_partitioning.partition;
 
 public class ParallelBufferPartitioner(int chunkSize) : IPartitioner
 {
-    public PartitionResult Partition(DataTuple[] data, int numberOfHashBits, int numberOfThreads)
+    public void Partition(DataTuple[] data, int numberOfHashBits, int numberOfThreads)
     {
         int numberOfChunks = (data.Length + chunkSize - 1) / chunkSize; // Ceiling division
 
@@ -51,7 +51,5 @@ public class ParallelBufferPartitioner(int chunkSize) : IPartitioner
                 }
             }
         });
-
-        return new PartitionResult { Partitions = chunks.ToDictionary(kvp => kvp.Key, kvp => kvp.Value) };
     }
 }

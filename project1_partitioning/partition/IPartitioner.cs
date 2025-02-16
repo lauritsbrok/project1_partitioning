@@ -10,7 +10,6 @@ public interface IPartitioner
     /// <param name="data">The array of input tuples.</param>
     /// <param name="numberOfHashBits">The number of hash bits used (resulting in 2^numberOfHashBits partitions).</param>
     /// <param name="numberOfThreads">The number of threads to use.</param>
-    /// <returns>A PartitionResult containing the partitioned data.</returns>
-    PartitionResult Partition(DataTuple[] data, int numberOfHashBits, int numberOfThreads);
+    void Partition(DataTuple[] data, int numberOfHashBits, int numberOfThreads);
     
 }
