@@ -3,9 +3,9 @@ using project1_partitioning.Utilities;
 
 namespace project1_partitioning.partition;
 
-public static class IndependentOutputPartitioner
+public class IndependentOutputPartitioner : IPartitioner
 {
-    public static void Partition(DataTuple[] data, int numberOfHashBits, int numberOfThreads)
+    public void Partition(DataTuple[] data, int numberOfHashBits, int numberOfThreads)
     {
         int numberOfPartitions = Utils.CalculateNumberOfPartitions(numberOfHashBits);
 
