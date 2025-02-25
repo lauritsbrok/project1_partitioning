@@ -35,33 +35,6 @@ public class PartitionThroughputTest
             }   
         }
     }
-    
-    public static void ParallelBufferChunkSizeTest()
-    {
-        int[] hashBits = [.. Enumerable.Range(1, 18)];
-        int[] chunkSizes = Enumerable.Range(0, 25).Select(i => 1 << i).ToArray(); // Varying chunk sizes
-        int tupleCount = 1_000_000;                     // 1 million tuples per test
-
-        DataTuple[] data = DataGenerator.GenerateData((int)Math.Pow(2.0, 24.0));
-
-        Console.WriteLine("HashBits Threads Throughput (MTPS) ChunkSize");
-
-        foreach (var hashBit in hashBits)
-        {
-            foreach (int chunkSize in chunkSizes)
-            {
-                var partitioner = new ParallelBufferPartitioner(chunkSize);
-                var stopwatch = Stopwatch.StartNew();
-                partitioner.Partition(data, hashBit, 32);
-                stopwatch.Stop();
-                
-                double seconds = stopwatch.Elapsed.TotalSeconds;
-                double mtps = (tupleCount / 1_000_000.0) / seconds;
-                
-                PrintChunkData(hashBit, 32, mtps, chunkSize);
-            }   
-        }
-    }
 
     public static void IndependentOutputTest()
     {
@@ -96,16 +69,6 @@ public class PartitionThroughputTest
         else if (threads >= 10) Console.WriteLine($"       {hashBit}      {threads}       {mtps:F2}");
         else if (hashBit >= 10) Console.WriteLine($"      {hashBit}       {threads}       {mtps:F2}");
         else Console.WriteLine($"       {hashBit}      {threads}       {mtps:F2}");
-        
-    }
-    
-    private static void PrintChunkData(int hashBit, int threads, double mtps, int chunkSize)
-    {
-        if(threads < 10 && hashBit < 10) Console.WriteLine($"       {hashBit}       {threads}       {mtps:F2}   {chunkSize}");
-        else if (threads >= 10 && hashBit >= 10) Console.WriteLine($"      {hashBit}      {threads}       {mtps:F2}   {chunkSize}");
-        else if (threads >= 10) Console.WriteLine($"       {hashBit}      {threads}       {mtps:F2}   {chunkSize}");
-        else if (hashBit >= 10) Console.WriteLine($"      {hashBit}       {threads}       {mtps:F2}   {chunkSize}");
-        else Console.WriteLine($"       {hashBit}      {threads}       {mtps:F2}   {chunkSize}");
         
     }
 }
