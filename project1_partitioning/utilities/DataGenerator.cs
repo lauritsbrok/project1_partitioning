@@ -60,6 +60,7 @@ namespace project1_partitioning.Utilities
                 DataTuple[] data = GenerateData(count);
                 SaveData(data, path);
                 Console.WriteLine($"Data generated and saved to {path}");
+                Console.WriteLine("");
                 return data;
             }
 
@@ -74,7 +75,7 @@ namespace project1_partitioning.Utilities
                     long payload = reader.ReadInt64();
                     data[i] = new DataTuple(key, payload);
                 }
-                Console.WriteLine($"Data loaded from {path}");
+                Console.WriteLine($"Data loaded from {path}\n");
                 return data;
             }
         }
