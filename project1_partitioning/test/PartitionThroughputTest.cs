@@ -14,7 +14,7 @@ public class PartitionThroughputTest
     public static void RunTest(string fileName, string folderPrefix, Func<IPartitioner> partitionerFactory)
     {
         //int[] hashBits = Enumerable.Range(1, 2).ToArray();
-        int[] hashBits = [.. Enumerable.Range(3, 3)];
+        int[] hashBits = [.. Enumerable.Range(1, 18)];
         int[] threadCounts = [1, 2, 4, 8, 16, 32];
         int tupleCount = 1_000_000; // 1 million tuples per test
         int iterations = 8;
@@ -87,6 +87,6 @@ public class PartitionThroughputTest
         else if (threads >= 10) Console.WriteLine($"       {hashBit}      {threads}       {mtps:F2}");
         else if (hashBit >= 10) Console.WriteLine($"      {hashBit}       {threads}       {mtps:F2}");
         else Console.WriteLine($"       {hashBit}      {threads}       {mtps:F2}");
-        
+
     }
 }
