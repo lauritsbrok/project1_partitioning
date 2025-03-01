@@ -14,7 +14,8 @@ cd - > /dev/null
 echo ""
 
 # EDIT HERE FOR SPECIFIC GROUPINGS
-CORE_SETS=("0" "0,16")
+CORE_SETS=("0,2,4,6,9,11,13,15" "0,1,2,3,4,6,8,10,11" "16-31" "0-15" "0-31")
+
 
 # Run for each core set
 for CORES in "${CORE_SETS[@]}"; do
