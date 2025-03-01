@@ -6,11 +6,11 @@ import os
 import sys
 
 # Load all CSV files
-output_dir = "../plots"
+output_dir = "../newest-plots"
 os.makedirs(output_dir, exist_ok=True)  # Create directory if it doesn't exist
 
 # Get all directories matching the pattern
-directories = glob.glob("../output/*")
+directories = glob.glob("../latest-output/*")
 
 if not directories:
     print("No directories found matching pattern")
