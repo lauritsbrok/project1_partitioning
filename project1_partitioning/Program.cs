@@ -12,7 +12,7 @@ class Program
 
         string folderPrefix = args[0];
 
-        PartitionThroughputTest.ConcurrentOutputTest(folderPrefix);
+        //PartitionThroughputTest.ConcurrentOutputTest(folderPrefix);
         PartitionThroughputTest.IndependentOutputTest(folderPrefix);
     }
 }
